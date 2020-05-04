@@ -2,13 +2,12 @@ const express = require('express');
 const app = express();
 const routes = require('./routes');
 const cors = require('cors');
-
-const port = process.env.PORT || 3333;
-const host = process.env.HOST || '0.0.0.0';
+const { errors } = require('celebrate');
 
 app.use(cors());
 app.use(express.json());
 app.use(routes);
+app.use(errors());
 
 app.get('/', (req, res) => {
     res.json({
@@ -16,4 +15,4 @@ app.get('/', (req, res) => {
     });
 });
 
-app.listen(port);
+module.exports = app;
